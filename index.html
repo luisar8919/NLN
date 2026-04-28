@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NLN · No Loading News — Noticias de videojuegos indie y gaming en español, al instante.">
+<meta property="og:title" content="NLN · No Loading News">
+<meta property="og:description" content="Noticias de videojuegos indie y gaming en español, sin esperas.">
+<meta property="og:type" content="website">
+<title>NLN · No Loading News</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:        #F6F4EF;
+  --surface:   #FFFFFF;
+  --border:    #E5E1D8;
+  --text:      #181614;
+  --muted:     #7A7468;
+  --accent:    #0A3D1F;
+  --gold:      #C8900A;
+  --red:       #B52B2B;
+  --tag-green: #EAF2EC;
+  --tag-red:   #FAEAEA;
+  --tag-gray:  #EFEFEF;
+  --tag-gold:  #FBF3E3;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+header {
+  background: var(--accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  gap: 2rem;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logo-nln {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.logo-separator {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.25);
+  align-self: center;
+}
+
+.logo-full {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.logo-full strong {
+  display: block;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+
+/* Ticker de última hora */
+.ticker-wrap {
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.ticker {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: ticker 40s linear infinite;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticker-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+#search {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem 0.4rem 2rem;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  outline: none;
+  width: 200px;
+  transition: all 0.2s;
+}
+
+#search::placeholder { color: rgba(255,255,255,0.35); }
+#search:focus { background: rgba(255,255,255,0.15); border-color: var(--gold); width: 260px; }
+
+.search-icon {
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.twitter-link {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.twitter-link:hover { background: rgba(255,255,255,0.2); }
+
+/* ── NAV FILTERS ─────────────────────────────────────────── */
+.nav-filters {
+  background: var(--text);
+  border-bottom: 2px solid var(--gold);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s;
+  position: relative;
+}
+
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.15s;
+}
+
+.nav-btn:hover { color: rgba(255,255,255,0.8); }
+.nav-btn.active { color: #fff; }
+.nav-btn.active::after { transform: scaleX(1); }
+
+/* ── MAIN ────────────────────────────────────────────────── */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+#hero-section { margin-bottom: 3rem; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-secondary { display: none; }
+}
+
+.hero-main {
+  grid-row: 1 / 3;
+  position: relative;
+  background: var(--surface);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.hero-main img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.hero-main:hover img { transform: scale(1.02); }
+
+.hero-main-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,20,15,0.92) 0%, rgba(10,20,15,0.3) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.8rem;
+  gap: 0.7rem;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.live-dot {
+  width: 7px; height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+.live-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero-titulo-main {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  line-height: 1.15;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.hero-meta-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.hero-secondary {
+  background: var(--surface);
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border-left: 1px solid var(--border);
+}
+
+.hero-secondary:hover { background: #FAFAF7; }
+
+.hero-secondary + .hero-secondary {
+  border-top: 1px solid var(--border);
+}
+
+.secondary-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--border);
+}
+
+.secondary-titulo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.secondary-meta {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* ── TIPO TAG ────────────────────────────────────────────── */
+.tipo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.tipo-tag.lanzamiento { background: var(--tag-green); color: #0A3D1F; }
+.tipo-tag.polemica    { background: var(--tag-red);   color: var(--red); }
+.tipo-tag.muerte      { background: var(--tag-gray);  color: #444; }
+.tipo-tag.general,
+.tipo-tag.noticia     { background: var(--tag-gold);  color: #7A5800; }
+
+/* ── SECTION HEADER ──────────────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--text);
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+.section-count {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ── GRID ────────────────────────────────────────────────── */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  animation: fadeUp 0.35s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+}
+
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  background: var(--border);
+}
+
+.card:hover .card-img { transform: scale(1.04); }
+
+.card-viral {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.card-titulo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-resumen {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--muted);
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.card-stats { display: flex; gap: 0.7rem; align-items: center; }
+
+.card-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.card-link:hover { text-decoration: underline; }
+
+/* ── MODAL ───────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18,16,12,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--surface);
+  border-radius: 12px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.25s;
+}
+
+.modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+.modal-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  display: block;
+}
+
+.modal-body { padding: 1.8rem; }
+
+.modal-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+
+.modal-close:hover { border-color: var(--text); color: var(--text); }
+
+.modal-titulo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+}
+
+.modal-resumen {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.modal-stats {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.modal-stat {
+  flex: 1;
+  text-align: center;
+  padding: 0.8rem;
+  border-right: 1px solid var(--border);
+}
+
+.modal-stat:last-child { border-right: none; }
+
+.modal-stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.modal-stat-label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+}
+
+.modal-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+.btn-dark {
+  background: var(--text);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: background 0.15s;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-dark:hover { background: var(--accent); }
+
+.btn-outline {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 400;
+  transition: border-color 0.15s;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-outline:hover { border-color: var(--text); }
+
+/* ── EMPTY / LOADING ─────────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+.empty-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 0.8rem;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  width: 28px; height: 28px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  background: var(--text);
+  color: rgba(255,255,255,0.45);
+  padding: 2.5rem 2rem;
+  margin-top: 5rem;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.footer-logo span { color: var(--gold); }
+
+.footer-text { font-size: 0.75rem; line-height: 1.8; }
+.footer-text a { color: rgba(255,255,255,0.6); text-decoration: none; }
+.footer-text a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <a href="/" class="logo-wrap">
+      <span class="logo-nln">NLN</span>
+      <div class="logo-separator"></div>
+      <div class="logo-full">
+        <strong>No Loading News</strong>
+        Noticias gaming al instante
+      </div>
+    </a>
+    <div class="ticker-wrap" id="ticker-wrap">
+      <div class="ticker" id="ticker"></div>
+    </div>
+    <div class="header-right">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
+      </div>
+      <a href="https://twitter.com/elmarioverde89" target="_blank" class="twitter-link">
+        𝕏 @elmarioverde89
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- FILTROS -->
+<nav class="nav-filters">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-tipo="todos">Todas</button>
+    <button class="nav-btn" data-tipo="viral">🔥 Más virales</button>
+    <button class="nav-btn" data-tipo="lanzamiento">🚀 Lanzamientos</button>
+    <button class="nav-btn" data-tipo="polemica">⚡ Polémicas</button>
+    <button class="nav-btn" data-tipo="muerte">🕯️ In memoriam</button>
+    <button class="nav-btn" data-tipo="general">📰 General</button>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section id="hero-section" style="display:none; margin-bottom:3rem;">
+    <div class="hero-grid" id="hero-grid"></div>
+  </section>
+
+  <!-- GRID -->
+  <div class="section-header">
+    <h2 class="section-title">Últimas Noticias</h2>
+    <span class="section-count" id="count"></span>
+  </div>
+  <div id="grid">
+    <div class="loading"><div class="spinner"></div><span>Cargando...</span></div>
+  </div>
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="cerrarModal(event)">
+  <div class="modal" id="modal"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">NLN <span>·</span></div>
+      <div style="font-size:0.7rem;margin-top:0.3rem;color:rgba(255,255,255,0.3)">No Loading News</div>
+    </div>
+    <div class="footer-text">
+      Noticias de videojuegos indie y gaming en español<br>
+      <a href="https://twitter.com/elmarioverde89" target="_blank">𝕏 @elmarioverde89</a>
+      &nbsp;·&nbsp;
+      <span id="footer-date"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const JSON_URL = 'https://gamerbotnews.blob.core.windows.net/datos-excel/noticias.json';
+
+let todasNoticias = [];
+let filtroActual  = 'todos';
+let busqueda      = '';
+
+// ── Cargar ──────────────────────────────────────────────────
+async function cargarNoticias() {
+  try {
+    const res  = await fetch(JSON_URL + '?t=' + Date.now());
+    const data = await res.json();
+    todasNoticias = data.noticias || [];
+
+    document.getElementById('footer-date').textContent =
+      'Actualizado ' + formatFecha(data.actualizado);
+
+    iniciarTicker();
+    renderizar();
+  } catch(e) {
+    document.getElementById('grid').innerHTML = `
+      <div class="empty">
+        <span class="empty-icon">📡</span>
+        <p>No se pudieron cargar las noticias.<br>Intenta en unos minutos.</p>
+      </div>`;
+  }
+}
+
+// ── Ticker ──────────────────────────────────────────────────
+function iniciarTicker() {
+  const items = todasNoticias.slice(0, 10);
+  if (!items.length) {
+    document.getElementById('ticker-wrap').style.display = 'none';
+    return;
+  }
+  const html = items.map(n =>
+    `<span class="ticker-item"><span class="ticker-dot"></span>${n.titulo}</span>`
+  ).join('');
+  // Duplicar para loop infinito
+  document.getElementById('ticker').innerHTML = html + html;
+}
+
+// ── Filtrar ─────────────────────────────────────────────────
+function filtrar() {
+  let lista = [...todasNoticias];
+
+  if (filtroActual === 'viral') {
+    lista = lista.filter(n => n.score > 0).sort((a,b) => b.score - a.score);
+  } else if (filtroActual !== 'todos') {
+    lista = lista.filter(n => n.tipo === filtroActual || n.tipo === 'noticia' && filtroActual === 'general');
+  }
+
+  if (busqueda.trim()) {
+    const q = busqueda.toLowerCase();
+    lista = lista.filter(n =>
+      n.titulo.toLowerCase().includes(q) ||
+      n.resumen.toLowerCase().includes(q)
+    );
+  }
+
+  return lista;
+}
+
+// ── Renderizar ───────────────────────────────────────────────
+function renderizar() {
+  const lista = filtrar();
+  const grid  = document.getElementById('grid');
+
+  document.getElementById('count').textContent =
+    `${lista.length} ${lista.length === 1 ? 'noticia' : 'noticias'}`;
+
+  // Hero
+  const heroSection = document.getElementById('hero-section');
+  const heroGrid    = document.getElementById('hero-grid');
+
+  if (lista.length >= 3 && filtroActual === 'todos' && !busqueda) {
+    const [h1, h2, h3] = lista;
+    heroSection.style.display = 'block';
+    heroGrid.innerHTML = `
+      <div class="hero-main" onclick="abrirModal('${h1.id}')">
+        <img src="${h1.imagen}" alt="${h1.titulo}"
+             onerror="this.style.display='none'">
+        <div class="hero-main-overlay">
+          <div class="hero-eyebrow">
+            <div class="live-dot"></div>
+            <span class="live-label">Destacado</span>
+          </div>
+          <h1 class="hero-titulo-main">${h1.titulo}</h1>
+          <div class="hero-meta-main">
+            <span class="tipo-tag ${h1.tipo}">${tipoLabel(h1.tipo)}</span>
+            <span>${h1.fecha}</span>
+            ${h1.likes > 0 ? `<span>❤️ ${h1.likes}</span>` : ''}
+            ${h1.rts > 0   ? `<span>🔁 ${h1.rts}</span>`   : ''}
+          </div>
+        </div>
+      </div>
+      ${[h2, h3].map(n => `
+      <div class="hero-secondary" onclick="abrirModal('${n.id}')">
+        <img class="secondary-img" src="${n.imagen}" alt="${n.titulo}"
+             onerror="this.style.background='var(--border)'">
+        <span class="tipo-tag ${n.tipo}">${tipoLabel(n.tipo)}</span>
+        <div class="secondary-titulo">${n.titulo}</div>
+        <div class="secondary-meta">${n.fecha}${n.likes > 0 ? ` · ❤️ ${n.likes}` : ''}</div>
+      </div>`).join('')}`;
+  } else {
+    heroSection.style.display = 'none';
+  }
+
+  // Grid
+  const offset = (heroSection.style.display !== 'none') ? 3 : 0;
+  const resto  = lista.slice(offset);
+
+  if (resto.length === 0 && lista.length === 0) {
+    grid.innerHTML = `<div class="empty"><span class="empty-icon">🎮</span><p>No hay noticias en esta categoría todavía.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = resto.map((n, idx) => `
+    <article class="card" style="animation-delay:${Math.min(idx*0.03,0.4)}s"
+             onclick="abrirModal('${n.id}')">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${n.imagen}" alt="${n.titulo}"
+             onerror="this.style.minHeight='160px';this.style.display='block'">
+        ${n.score > 50 ? '<div class="card-viral">🔥 Viral</div>' : ''}
+      </div>
+      <div class="card-body">
+        <span class="tipo-tag ${n.tipo}">${tipoLabel(n.tipo)}</span>
+        <h2 class="card-titulo">${n.titulo}</h2>
+        <p class="card-resumen">${n.resumen}</p>
+        <div class="card-footer">
+          <div class="card-stats">
+            <span>${n.fecha}</span>
+            ${n.likes > 0 ? `<span>❤️ ${n.likes}</span>` : ''}
+            ${n.rts > 0   ? `<span>🔁 ${n.rts}</span>`   : ''}
+          </div>
+          ${n.tweet_url
+            ? `<a href="${n.tweet_url}" target="_blank" class="card-link"
+                 onclick="event.stopPropagation()">Ver en 𝕏</a>`
+            : ''}
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+// ── Modal ────────────────────────────────────────────────────
+function abrirModal(id) {
+  const n = todasNoticias.find(x => x.id === id);
+  if (!n) return;
+
+  const tieneStats = n.likes > 0 || n.rts > 0 || n.impresiones > 0;
+
+  document.getElementById('modal').innerHTML = `
+    <img class="modal-img" src="${n.imagen}" alt="${n.titulo}"
+         onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-eyebrow">
+        <span class="tipo-tag ${n.tipo}">${tipoLabel(n.tipo)}</span>
+        <button class="modal-close" onclick="cerrarModal()">✕ Cerrar</button>
+      </div>
+      <h2 class="modal-titulo">${n.titulo}</h2>
+      ${tieneStats ? `
+      <div class="modal-stats">
+        ${n.likes > 0 ? `<div class="modal-stat"><div class="modal-stat-val">${n.likes}</div><div class="modal-stat-label">Likes</div></div>` : ''}
+        ${n.rts > 0 ? `<div class="modal-stat"><div class="modal-stat-val">${n.rts}</div><div class="modal-stat-label">Retweets</div></div>` : ''}
+        ${n.impresiones > 0 ? `<div class="modal-stat"><div class="modal-stat-val">${fmtNum(n.impresiones)}</div><div class="modal-stat-label">Impresiones</div></div>` : ''}
+        ${n.score > 0 ? `<div class="modal-stat"><div class="modal-stat-val">${Math.round(n.score)}</div><div class="modal-stat-label">Score</div></div>` : ''}
+      </div>` : ''}
+      <p class="modal-resumen">${n.resumen}</p>
+      <div class="modal-actions">
+        ${n.url_fuente ? `<a href="${n.url_fuente}" target="_blank" class="btn-dark">Leer noticia ↗</a>` : ''}
+        ${n.tweet_url  ? `<a href="${n.tweet_url}"  target="_blank" class="btn-dark">Ver en 𝕏 ↗</a>` : ''}
+        <button class="btn-outline" onclick="cerrarModal()">Cerrar</button>
+      </div>
+    </div>`;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal(e) {
+  if (!e || e.target === document.getElementById('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+
+// ── Eventos ──────────────────────────────────────────────────
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filtroActual = btn.dataset.tipo;
+    renderizar();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  busqueda = e.target.value;
+  renderizar();
+});
+
+// ── Helpers ──────────────────────────────────────────────────
+function tipoLabel(tipo) {
+  const map = {
+    lanzamiento: '🚀 Lanzamiento',
+    polemica:    '⚡ Polémica',
+    muerte:      '🕯️ In memoriam',
+    general:     '📰 Gaming',
+    noticia:     '📰 Gaming',
+  };
+  return map[tipo] || '📰 Gaming';
+}
+
+function formatFecha(iso) {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('es-ES', {
+      day: '2-digit', month: 'short', year: 'numeric'
+    });
+  } catch { return iso.slice(0,10); }
+}
+
+function fmtNum(n) {
+  if (n >= 1000) return (n/1000).toFixed(1) + 'k';
+  return n.toString();
+}
+
+cargarNoticias();
+</script>
+</body>
+</html>
